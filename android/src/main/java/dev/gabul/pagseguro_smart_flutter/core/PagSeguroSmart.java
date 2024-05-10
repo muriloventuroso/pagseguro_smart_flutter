@@ -59,8 +59,8 @@ public class PagSeguroSmart {
   public PagSeguroSmart(Context context, MethodChannel channel) {
     PlugPag instancePlugPag = new PlugPag(context);
     PlugPagCustomPrinterLayout customDialog = new PlugPagCustomPrinterLayout();
-    customDialog.setButtonBackgroundColor(dialogColor);
-    instancePlugPag.setPlugPagCustomPrinterLayout("#34076d");
+    customDialog.setButtonBackgroundColor("#34076d");
+    instancePlugPag.setPlugPagCustomPrinterLayout(customDialog);
     this.plugPag = instancePlugPag;
     this.mChannel = channel;
   }
