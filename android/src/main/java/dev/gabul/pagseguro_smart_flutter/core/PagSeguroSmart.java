@@ -53,8 +53,8 @@ public class PagSeguroSmart {
 
   //Printer
   private static final String PRINTER_FILE = "paymentPrinterFile";
-  private static final String PRINT_STABLISHMENT_RECEIPT "printStablishmentReceipt";
-  private static final String PRINT_CUSTOMER_RECEIPT "printCustomerReceipt";
+  private static final String PRINT_STABLISHMENT_RECEIPT = "printStablishmentReceipt";
+  private static final String PRINT_CUSTOMER_RECEIPT = "printCustomerReceipt";
 
   public PagSeguroSmart(Context context, MethodChannel channel) {
     PlugPag instancePlugPag = new PlugPag(context);
