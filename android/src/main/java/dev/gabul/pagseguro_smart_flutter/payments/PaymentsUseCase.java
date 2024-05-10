@@ -169,9 +169,9 @@ public class PaymentsUseCase {
   private Observable<ActionResult> doPayment(
     final PlugPagPaymentData paymentData
   ) {
-    PlugPagCustomPrinterLayout customDialog = new PlugPagCustomPrinterLayout();
-    customDialog.setMaxTimeShowPopup(30);
-    mPlugPag.setPlugPagCustomPrinterLayout(customDialog);
+    //PlugPagCustomPrinterLayout customDialog = new PlugPagCustomPrinterLayout();
+    //customDialog.setMaxTimeShowPopup(30);
+    //mPlugPag.setPlugPagCustomPrinterLayout(customDialog);
     return Observable.create(emitter -> {
       ActionResult result = new ActionResult();
       setListener(emitter, result);
