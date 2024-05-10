@@ -136,6 +136,16 @@ class Payment {
     }
   }
 
+  // Function to reprint customer receipt
+  Future<bool> printCustomerReceipt() async {
+    return await channel.invokeMethod(PaymentTypeCall.REPRINT_CUSTOMER_RECEIPT.method);
+  }
+
+  // Function to reprint stablishment receipt
+  Future<bool> printStablishmentReceipt() async {
+    return await channel.invokeMethod(PaymentTypeCall.REPRINT_STABLISHMENT_RECEIPT.method);
+  }
+
 //Function to listen to pagseguro returns in the native environment and notify Flutter
   Future<dynamic> _callHandler(MethodCall call) async {
     switch (call.method.handler) {

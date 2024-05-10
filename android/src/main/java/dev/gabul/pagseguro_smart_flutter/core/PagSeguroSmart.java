@@ -37,6 +37,7 @@ public class PagSeguroSmart {
   private static final String PAYMENT_PIX = "paymentPix";
   private static final String START_PAYMENT = "startPayment";
 
+
   private static final String ACTIVE_PINPAD = "paymentActivePinpad";
   private static final String PINPAD_AUTHENTICATED = "paymentIsAuthenticated";
   private static final String REBOOT_DEVICE = "paymentReboot";
@@ -52,6 +53,8 @@ public class PagSeguroSmart {
 
   //Printer
   private static final String PRINTER_FILE = "paymentPrinterFile";
+  private static final String PRINT_STABLISHMENT_RECEIPT "printStablishmentReceipt";
+  private static final String PRINT_CUSTOMER_RECEIPT "printCustomerReceipt";
 
   public PagSeguroSmart(Context context, MethodChannel channel) {
     PlugPag instancePlugPag = new PlugPag(context);
@@ -189,7 +192,13 @@ public class PagSeguroSmart {
     }
     else if(call.method.equals(DEBIT_NFC)) {
       this.nfcPayment.debitNFCCard(call.argument("idEvento"),call.argument("valor"));
-    } else {
+    } else if(call.method.equals(PRINT_CUSTOMER_RECEIPT)) {
+      this.payment.printCustomerReceipt();
+      result.success(true);
+    }else if(call.method.equals(PRINT_STABLISHMENT_RECEIPT)) {
+      this.payment.printStablishmentReceipt();
+      result.success(true);
+    }else {
       result.notImplemented();
     }
   }

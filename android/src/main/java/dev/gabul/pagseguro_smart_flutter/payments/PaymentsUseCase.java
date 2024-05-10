@@ -260,6 +260,24 @@ public class PaymentsUseCase {
     });
   }
 
+  public Observable<ActionResult> printStablishmentReceipt() {
+      return Observable.create(emitter -> {
+          ActionResult actionResult = new ActionResult();
+          setPrintListener(emitter, actionResult);
+          PlugPagPrintResult result = mPlugPag.reprintStablishmentReceipt();
+          sendResponse(emitter, result, actionResult);
+      });
+  }
+
+  public Observable<ActionResult> printCustomerReceipt() {
+      return Observable.create(emitter -> {
+          ActionResult actionResult = new ActionResult();
+          setPrintListener(emitter, actionResult);
+          PlugPagPrintResult result = mPlugPag.reprintCustomerReceipt();
+          sendResponse(emitter, result, actionResult);
+      });
+  }
+
   public void rebootDevice() {
     try {
       mPlugPag.reboot();
