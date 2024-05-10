@@ -230,9 +230,6 @@ public class PaymentsUseCase {
   public Observable<ActionResult> initializeAndActivatePinpad(
     String activationCode
   ) {
-    PlugPagCustomPrinterLayout customDialog = new PlugPagCustomPrinterLayout();
-    customDialog.setMaxTimeShowPopup(30);
-    mPlugPag.setPlugPagCustomPrinterLayout(customDialog);
     return Observable.create(emitter -> {
       ActionResult actionResult = new ActionResult();
       mPlugPag.setEventListener(plugPagEventData -> {
