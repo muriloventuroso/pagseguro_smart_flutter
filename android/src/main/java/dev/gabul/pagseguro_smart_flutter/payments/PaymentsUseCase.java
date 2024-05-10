@@ -75,7 +75,7 @@ public class PaymentsUseCase {
         printReceipt,
         partialPay,
         isCarne
-      ),
+      )
     );
   }
 
