@@ -1,4 +1,7 @@
 package dev.gabul.pagseguro_smart_flutter.payments;
+
+import java.util.Locale;
+
 import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPag;
 import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagActivationData;
 import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagCustomPrinterLayout;
@@ -6,6 +9,8 @@ import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagInitializationResult;
 import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagPaymentData;
 import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagTransactionResult;
 import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagVoidData;
+import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagPrintResult;
+import br.com.uol.pagseguro.plugpagservice.wrapper.PlugPagPrinterListener;
 import br.com.uol.pagseguro.plugpagservice.wrapper.data.request.PlugPagBeepData;
 import br.com.uol.pagseguro.plugpagservice.wrapper.exception.PlugPagException;
 import dev.gabul.pagseguro_smart_flutter.core.ActionResult;
@@ -196,6 +201,16 @@ public class PaymentsUseCase {
     }
     emitter.onComplete();
   }
+
+  private void sendResponse(ObservableEmitter<ActionResult> emitter, PlugPagPrintResult printResult,
+                              ActionResult result) {
+
+        if (printResult.getResult() != 0) {
+            result.setResult(printResult.getResult());
+        }
+        emitter.onComplete();
+    }
+
   private void setListener(
     ObservableEmitter<ActionResult> emitter,
     ActionResult result
@@ -275,6 +290,26 @@ public class PaymentsUseCase {
           setPrintListener(emitter, actionResult);
           PlugPagPrintResult result = mPlugPag.reprintCustomerReceipt();
           sendResponse(emitter, result, actionResult);
+      });
+  }
+
+  private void setPrintListener(ObservableEmitter<ActionResult> emitter, ActionResult result) {
+      mPlugPag.setPrinterListener(new PlugPagPrinterListener() {
+          @Override
+          public void onError(PlugPagPrintResult printResult) {
+              result.setResult(printResult.getResult());
+              result.setMessage(String.format("Error %s %s", printResult.getErrorCode(), printResult.getMessage()));
+              result.setErrorCode(printResult.getErrorCode());
+              emitter.onNext(result);
+          }
+
+          @Override
+          public void onSuccess(PlugPagPrintResult printResult) {
+              result.setResult(printResult.getResult());
+              result.setMessage(String.format(Locale.getDefault(),"Print OK: Steps [%d]", printResult.getSteps()));
+              result.setErrorCode(printResult.getErrorCode());
+              emitter.onNext(result);
+          }
       });
   }
 

@@ -54,7 +54,15 @@ public class PaymentsPresenter {
 
   public void startPayment(int type, int amount, int installmentType, int installments, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
     doAction(mUseCase.doStartPayment(type, amount, installmentType, installments, userReference, printReceipt, partialPay, isCarne), amount);
-  }  
+  }
+
+  public void printCustomerReceipt(){
+    doAction(mUseCase.printCustomerReceipt(), 0);
+  }
+
+  public void printStablishmentReceipt(){
+    doAction(mUseCase.printStablishmentReceipt(), 0);
+  }
 
   private void doAction(Observable<ActionResult> action, int value) {
     mSubscribe =
