@@ -30,19 +30,19 @@ class Payment {
   }
 
 //Function to invoke method from credit payment with sdk the PagSeguro
-  Future<bool> creditPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false, String dialogColor = "#00ff33"}) async {
+  Future<bool> creditPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false}) async {
     return await channel.invokeMethod(PaymentTypeCall.CREDIT.method, {
       "value": value,
       "userReference": userReference,
       "printReceipt": printReceipt,
       "partialPay": partialPay,
       "isCarne": isCarne,
-      "dialogColor": dialogColor,
+
     });
   }
 
 //Function to invoke method from credit installment payment  with sdk the PagSeguro
-  Future<bool> creditPaymentParc(int value, int parc, {PaymentTypeCredit type = PaymentTypeCredit.CLIENT, String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false, String dialogColor = "#00ff33"}) async {
+  Future<bool> creditPaymentParc(int value, int parc, {PaymentTypeCredit type = PaymentTypeCredit.CLIENT, String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false}) async {
     return await channel.invokeMethod(PaymentTypeCall.CREDIT_PARC.method, {
       "value": value,
       "parc": parc,
@@ -51,49 +51,49 @@ class Payment {
       "printReceipt": printReceipt,
       "partialPay": partialPay,
       "isCarne": isCarne,
-      "dialogColor": dialogColor,
+
       
     });
   }
 
 //Function to invoke method from debit payment with sdk the PagSeguro
-  Future<bool> debitPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false, String dialogColor = "#00ff33"}) async {
+  Future<bool> debitPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false}) async {
     return await channel.invokeMethod(PaymentTypeCall.DEBIT.method, {
       "value": value,
       "userReference": userReference,
       "printReceipt": printReceipt,
       "partialPay": partialPay,
       "isCarne": isCarne,
-      "dialogColor": dialogColor,
+
     });
   }
 
   //Function to invoke method from debit payment with sdk the PagSeguro
-  Future<bool> pixPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false, String dialogColor = "#00ff33"}) async {
+  Future<bool> pixPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false}) async {
     return await channel.invokeMethod(PaymentTypeCall.PIX.method, {
       "value": value,
       "userReference": userReference,
       "printReceipt": printReceipt,
       "partialPay": partialPay,
       "isCarne": isCarne,
-      "dialogColor": dialogColor,
+
     });
   }
 
 //Function to invoke method from voucher payment with sdk the PagSeguro
-  Future<bool> voucherPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false, String dialogColor = "#00ff33"}) async {
+  Future<bool> voucherPayment(int value, {String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false}) async {
     return await channel.invokeMethod(PaymentTypeCall.VOUCHER.method, {
       "value": value,
       "userReference": userReference,
       "printReceipt": printReceipt,
       "partialPay": partialPay,
       "isCarne": isCarne,
-      "dialogColor": dialogColor,
+
     });
   }
 
 //Function to invoke method from credit installment payment  with sdk the PagSeguro
-  Future<bool> startPayment(PaymentType type, int amount, {PaymentTypeCredit installmentType = PaymentTypeCredit.CLIENT, int installments = 1, String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false, String dialogColor = "#00ff33"}) async {
+  Future<bool> startPayment(PaymentType type, int amount, {PaymentTypeCredit installmentType = PaymentTypeCredit.CLIENT, int installments = 1, String userReference = USER_REFERENCE, bool printReceipt = true, bool partialPay = false, bool isCarne = false}) async {
     return await channel.invokeMethod(PaymentTypeCall.START_PAYMENT.method, {
       "type": type.value,
       "amount": amount,
@@ -103,7 +103,7 @@ class Payment {
       "printReceipt": printReceipt,
       "partialPay": partialPay,
       "isCarne": isCarne,
-      "dialogColor": dialogColor,
+
     });
   }
 

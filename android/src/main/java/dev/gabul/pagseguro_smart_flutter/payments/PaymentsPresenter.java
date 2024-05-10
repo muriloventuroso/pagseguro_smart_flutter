@@ -28,32 +28,32 @@ public class PaymentsPresenter {
 
   public void beep() {mUseCase.beep();}
 
-  public void creditPaymentParc(int value, int type, int parc, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne, String dialogColor) {
-    doAction(mUseCase.doCreditPaymentParc(value, type, parc, userReference, printReceipt, partialPay, isCarne, dialogColor), value);
+  public void creditPaymentParc(int value, int type, int parc, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
+    doAction(mUseCase.doCreditPaymentParc(value, type, parc, userReference, printReceipt, partialPay, isCarne), value);
   }
 
-  public void creditPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne, String dialogColor) {
-    doAction(mUseCase.doCreditPayment(value, userReference, printReceipt, partialPay, isCarne, dialogColor), value);
+  public void creditPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
+    doAction(mUseCase.doCreditPayment(value, userReference, printReceipt, partialPay, isCarne), value);
   }
 
-  public void doDebitPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne, String dialogColor) {
-    doAction(mUseCase.doDebitPayment(value, userReference, printReceipt, partialPay, isCarne, dialogColor), value);
+  public void doDebitPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
+    doAction(mUseCase.doDebitPayment(value, userReference, printReceipt, partialPay, isCarne), value);
   }
 
-  public void doPixPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne, String dialogColor) {
-    doAction(mUseCase.doPixPayment(value, userReference, printReceipt, partialPay, isCarne, dialogColor), value);
+  public void doPixPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
+    doAction(mUseCase.doPixPayment(value, userReference, printReceipt, partialPay, isCarne), value);
   }
 
-  public void doVoucherPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne, String dialogColor) {
-    doAction(mUseCase.doVoucherPayment(value, userReference, printReceipt, partialPay, isCarne, dialogColor), value);
+  public void doVoucherPayment(int value, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
+    doAction(mUseCase.doVoucherPayment(value, userReference, printReceipt, partialPay, isCarne), value);
   }
 
   public void doRefund(String transactionCode, String transactionId) {
     doAction(mUseCase.doRefund(transactionCode, transactionId), 0);
   }
 
-  public void startPayment(int type, int amount, int installmentType, int installments, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne, String dialogColor) {
-    doAction(mUseCase.doStartPayment(type, amount, installmentType, installments, userReference, printReceipt, partialPay, isCarne, dialogColor), amount);
+  public void startPayment(int type, int amount, int installmentType, int installments, String userReference, Boolean printReceipt, Boolean partialPay, Boolean isCarne) {
+    doAction(mUseCase.doStartPayment(type, amount, installmentType, installments, userReference, printReceipt, partialPay, isCarne), amount);
   }
 
   public void printCustomerReceipt(){
