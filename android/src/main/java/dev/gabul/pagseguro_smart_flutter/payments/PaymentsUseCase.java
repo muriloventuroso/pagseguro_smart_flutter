@@ -40,7 +40,8 @@ public class PaymentsUseCase {
     String userReference,
     Boolean printReceipt, 
     Boolean partialPay, 
-    Boolean isCarne
+    Boolean isCarne,
+    String dialogColor
   ) {
     return doPayment(
       new PlugPagPaymentData(
@@ -63,7 +64,8 @@ public class PaymentsUseCase {
     String userReference,
     Boolean printReceipt, 
     Boolean partialPay, 
-    Boolean isCarne    
+    Boolean isCarne,
+    String dialogColor  
   ) {
     return doPayment(
       new PlugPagPaymentData(
@@ -84,7 +86,8 @@ public class PaymentsUseCase {
     String userReference,
     Boolean printReceipt, 
     Boolean partialPay, 
-    Boolean isCarne
+    Boolean isCarne,
+    String dialogColor
   ) {
     return doPayment(
       new PlugPagPaymentData(
@@ -105,7 +108,8 @@ public class PaymentsUseCase {
     String userReference,
     Boolean printReceipt, 
     Boolean partialPay, 
-    Boolean isCarne
+    Boolean isCarne,
+    String dialogColor
   ) {
     return doPayment(
       new PlugPagPaymentData(
@@ -126,7 +130,8 @@ public class PaymentsUseCase {
     String userReference,
     Boolean printReceipt, 
     Boolean partialPay, 
-    Boolean isCarne
+    Boolean isCarne,
+    String dialogColor
   ) {
     return doPayment(
       new PlugPagPaymentData(
@@ -150,7 +155,8 @@ public class PaymentsUseCase {
     String userReference,
     Boolean printReceipt, 
     Boolean partialPay, 
-    Boolean isCarne    
+    Boolean isCarne,
+    String dialogColor
   ) {
     return doPayment(
       new PlugPagPaymentData(
@@ -162,16 +168,18 @@ public class PaymentsUseCase {
         printReceipt,
         partialPay,
         isCarne
-      )
+      ),
+      dialogColor
     );
   }  
 
   private Observable<ActionResult> doPayment(
-    final PlugPagPaymentData paymentData
+    final PlugPagPaymentData paymentData,
+    String dialogColor,
   ) {
-    //PlugPagCustomPrinterLayout customDialog = new PlugPagCustomPrinterLayout();
-    //customDialog.setMaxTimeShowPopup(30);
-    //mPlugPag.setPlugPagCustomPrinterLayout(customDialog);
+    PlugPagCustomPrinterLayout customDialog = new PlugPagCustomPrinterLayout();
+    customDialog.setDialogColor(dialogColor);
+    mPlugPag.setPlugPagCustomPrinterLayout(customDialog);
     return Observable.create(emitter -> {
       ActionResult result = new ActionResult();
       setListener(emitter, result);

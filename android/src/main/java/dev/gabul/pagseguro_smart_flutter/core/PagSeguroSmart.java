@@ -104,7 +104,8 @@ public class PagSeguroSmart {
               (String) call.argument("userReference"),
               (Boolean) call.argument("printReceipt"),
               (Boolean) call.argument("partialPay"),
-              (Boolean) call.argument("isCarne")
+              (Boolean) call.argument("isCarne"),
+              (String) call.argument("dialogColor")
       );
     } else if (call.method.equals(ACTIVE_PINPAD)) {
       this.payment.activate(call.argument("code"));
@@ -118,7 +119,8 @@ public class PagSeguroSmart {
               (String) call.argument("userReference"),
               (Boolean) call.argument("printReceipt"),
               (Boolean) call.argument("partialPay"),
-              (Boolean) call.argument("isCarne")
+              (Boolean) call.argument("isCarne"),
+              (String) call.argument("dialogColor")
       );
       result.success(true);
     } else if (call.method.equals(PAYMENT_CREDIT)) {
@@ -127,7 +129,8 @@ public class PagSeguroSmart {
               (String) call.argument("userReference"),
               (Boolean) call.argument("printReceipt"),
               (Boolean) call.argument("partialPay"),
-              (Boolean) call.argument("isCarne")
+              (Boolean) call.argument("isCarne"),
+              (String) call.argument("dialogColor")
       );
       result.success(true);
     } else if (call.method.equals(PAYMENT_CREDIT_PARC)) {
@@ -138,7 +141,8 @@ public class PagSeguroSmart {
           (String) call.argument("userReference"),
           (Boolean) call.argument("printReceipt"),
           (Boolean) call.argument("partialPay"),
-          (Boolean) call.argument("isCarne")
+          (Boolean) call.argument("isCarne"),
+          (String) call.argument("dialogColor")
         );
         result.success(true);
     } else if (call.method.equals(PAYMENT_VOUCHER)) {
@@ -147,7 +151,8 @@ public class PagSeguroSmart {
               (String) call.argument("userReference"),
               (Boolean) call.argument("printReceipt"),
               (Boolean) call.argument("partialPay"),
-              (Boolean) call.argument("isCarne")
+              (Boolean) call.argument("isCarne"),
+              (String) call.argument("dialogColor")
       );
       result.success(true);
     } else if (call.method.equals(START_PAYMENT)) {
@@ -159,7 +164,8 @@ public class PagSeguroSmart {
               (String) call.argument("userReference"),
               (Boolean) call.argument("printReceipt"),
               (Boolean) call.argument("partialPay"),
-              (Boolean) call.argument("isCarne")
+              (Boolean) call.argument("isCarne"),
+              (String) call.argument("dialogColor")
       );
       result.success(true);
     } else if (call.method.equals(PAYMENT_ABORT)) {
