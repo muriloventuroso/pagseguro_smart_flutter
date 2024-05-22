@@ -9,7 +9,6 @@ import dev.gabul.pagseguro_smart_flutter.nfc.NFCPresenter;
 import dev.gabul.pagseguro_smart_flutter.nfc.usecase.NFCUseCase;
 import dev.gabul.pagseguro_smart_flutter.payments.PaymentsPresenter;
 import dev.gabul.pagseguro_smart_flutter.printer.PrinterPresenter;
-import dev.gabul.pagseguro_smart_flutter.printer.usecase.PrinterUsecase;
 import dev.gabul.pagseguro_smart_flutter.user.usecase.DebitUserUseCase;
 import dev.gabul.pagseguro_smart_flutter.user.usecase.EditUserUseCase;
 import dev.gabul.pagseguro_smart_flutter.user.usecase.GetUserUseCase;
@@ -55,6 +54,7 @@ public class PagSeguroSmart {
   private static final String PRINTER_FILE = "paymentPrinterFile";
   private static final String PRINT_STABLISHMENT_RECEIPT = "printStablishmentReceipt";
   private static final String PRINT_CUSTOMER_RECEIPT = "printCustomerReceipt";
+  private static final String PRINTER = "paymentPrinter";
 
   public PagSeguroSmart(Context context, MethodChannel channel) {
     PlugPag instancePlugPag = new PlugPag(context);
@@ -69,6 +69,11 @@ public class PagSeguroSmart {
       PrinterPresenter printerPresenter = new PrinterPresenter(this.plugPag, this.mChannel);
       String filePath = call.argument("path");
       printerPresenter.printerFromFile(filePath);
+    }
+    if(call.method.equals(PRINTER)){
+      PrinterPresenter printerPresenter = new PrinterPresenter(this.plugPag, this.mChannel);
+      String filePath = call.argument("path");
+      printerPresenter.printFile(filePath);
     }
     if (this.payment == null) {
       this.payment = new PaymentsPresenter(this.plugPag, this.mChannel);

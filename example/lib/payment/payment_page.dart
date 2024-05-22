@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 import 'package:pagseguro_smart_flutter/pagseguro_smart_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'payment_controller.dart';
 
@@ -17,7 +22,8 @@ class _PaymentPageState extends State<PaymentPage> {
   final PaymentController controller = PaymentController();
 
   double? saleValue;
-  MoneyMaskedTextController moneyController = MoneyMaskedTextController(leftSymbol: "R\$ ", decimalSeparator: ",");
+  MoneyMaskedTextController moneyController =
+      MoneyMaskedTextController(leftSymbol: "R\$ ", decimalSeparator: ",");
 
   @override
   void initState() {
@@ -65,7 +71,9 @@ class _PaymentPageState extends State<PaymentPage> {
                           controller.clickPayment = true;
                         });
                         //Chamar o método de pagamento para transação no débito
-                        PagseguroSmart.instance().payment.debitPayment(controller.saleValue);
+                        PagseguroSmart.instance()
+                            .payment
+                            .debitPayment(controller.saleValue);
                       }
                     : null,
               ),
@@ -78,7 +86,9 @@ class _PaymentPageState extends State<PaymentPage> {
                           controller.clickPayment = true;
                         });
                         //Chamar o método de pagamento para transação no crédito a vista
-                        PagseguroSmart.instance().payment.creditPayment(controller.saleValue);
+                        PagseguroSmart.instance()
+                            .payment
+                            .creditPayment(controller.saleValue);
                       }
                     : null,
               ),
@@ -91,7 +101,9 @@ class _PaymentPageState extends State<PaymentPage> {
                           controller.clickPayment = true;
                         });
                         //Chamar o método de pagamento para transação no crédito parcelado em 2x
-                        PagseguroSmart.instance().payment.creditPaymentParc(controller.saleValue, 2);
+                        PagseguroSmart.instance()
+                            .payment
+                            .creditPaymentParc(controller.saleValue, 2);
                       }
                     : null,
               ),
@@ -104,7 +116,9 @@ class _PaymentPageState extends State<PaymentPage> {
                           controller.clickPayment = true;
                         });
                         //Chamar o método de pagamento para transação no voucher
-                        PagseguroSmart.instance().payment.voucherPayment(controller.saleValue);
+                        PagseguroSmart.instance()
+                            .payment
+                            .voucherPayment(controller.saleValue);
                       }
                     : null,
               ),
@@ -117,7 +131,9 @@ class _PaymentPageState extends State<PaymentPage> {
                           controller.clickPayment = true;
                         });
                         //Chamar o método de pagamento para transação no pix
-                        PagseguroSmart.instance().payment.pixPayment(controller.saleValue);
+                        PagseguroSmart.instance()
+                            .payment
+                            .pixPayment(controller.saleValue);
                       }
                     : null,
               ),
@@ -152,7 +168,8 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
           ElevatedButton(
             onPressed: () {
-              Future.delayed(const Duration(seconds: 3)).then((value) => setState(() {}));
+              Future.delayed(const Duration(seconds: 3))
+                  .then((value) => setState(() {}));
               //Chamar o método para retornar a última transação realizada
               PagseguroSmart.instance().payment.lastTransaction();
             },
@@ -165,12 +182,52 @@ class _PaymentPageState extends State<PaymentPage> {
             ElevatedButton(
               onPressed: () {
                 //Chamar o método para estornar uma transação
-                PagseguroSmart.instance().payment.refund(transactionCode: controller.transactionCode, transactionId: controller.transactionId);
+                PagseguroSmart.instance().payment.refund(
+                    transactionCode: controller.transactionCode,
+                    transactionId: controller.transactionId);
               },
               child: const Text("Estornar transação"),
             ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              //Chamar o método para retornar a última transação realizada
+              // var imgBytes = await getCanvasImage("Teste impressão");
+              // var dir = await getExternalStorageDirectory();
+              // var pathImg = "${dir!.path}/test.png";
+              // var file = File(pathImg);
+              // file.writeAsBytesSync(imgBytes!);
+              // print(pathImg);
+              PagseguroSmart.instance()
+                  .payment
+                  .printerfromFile("/storage/emulated/0/Download/teste.jpg");
+            },
+            child: const Text("Imprimir"),
+          ),
         ],
       ),
     );
+  }
+
+  Future<Uint8List?> getCanvasImage(String text) async {
+    final recorder = PictureRecorder();
+    var newCanvas = Canvas(recorder);
+
+    var builder = ParagraphBuilder(ParagraphStyle(fontStyle: FontStyle.normal));
+    builder.addText(text);
+    Paragraph paragraph = builder.build();
+    paragraph.layout(const ParagraphConstraints(width: 80));
+    newCanvas.drawParagraph(paragraph, Offset.zero);
+
+    final picture = recorder.endRecording();
+    var res = await picture.toImage(100, 100);
+    ByteData? data = await res.toByteData(format: ImageByteFormat.png);
+
+    if (data != null) {
+      return Uint8List.view(data.buffer);
+    }
+    return null;
   }
 }

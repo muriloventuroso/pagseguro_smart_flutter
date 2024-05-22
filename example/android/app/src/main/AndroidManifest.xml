@@ -1,7 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.gabul.pagseguro_smart_flutter_example">
    
-   <permission android:name="br.com.uol.pagseguro.permission.MANAGE_PAYMENTS"/>
    
    <application
         android:label="pagseguro_smart_flutter_example"
